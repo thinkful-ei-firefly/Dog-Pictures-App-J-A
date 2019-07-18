@@ -6,34 +6,30 @@ $('#dogForm').submit(function (event) {
   event.preventDefault();
   let dogNum = $('#dogNum').val();
   console.log(dogNum);
+  getDogs(dogNum);
 });
 
-function getDogImage() {
-  fetch('https://dog.ceo/api/breeds/image/random')
-    .then(resp => resp.jason())
-    .then(respJson =>
-      displayResults(respJson))
-    .catch(error => alert('Something wrong. Try again'))
+function getDogs (num) {
+  fetch (`https://dog.ceo/api/breeds/image/random/${num}`)
+    .then (response => response.json())
+    .then (json => {
+      console.log(json);
+      let links = json.message;
+      links.forEach(link => console.log(link));
+      showDogs(links);
+    })
+    .catch (error => console.log(error));
 }
 
+function linkToImg (link) {
+  console.log('linkToImg fired!')
+  return `
+<img src=${link} class="dogImg">
+`;}
 
-
-function displayResults(respJson) {
-
-  $('.results-img').replaceWith(
-    `<img src="${respJson.message}" class="results-img">`
-  )
-  $('.results').removeClass('hidden');
+function showDogs (links) {
+  console.log('showDogs fired!');
+  let dogHtml = links.map(link => linkToImg(link));
+  console.log(dogHtml);
+  $('ul').html(dogHtml);
 }
-
-function watchForm() {
-  $('form').submit(event => {
-    event.preventDefault();
-    getDogImage();
-  });
-}
-
-$(function () {
-  console.log('App loaded! Waiting for submit!');
-  watchForm();
-});
