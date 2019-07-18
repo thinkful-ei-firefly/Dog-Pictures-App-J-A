@@ -8,9 +8,6 @@ $('#dogForm').submit(function (event) {
   console.log(dogNum);
 });
 
-<<<<<<< HEAD
-=======
-
 function getDogImage() {
   fetch('https://dog.ceo/api/breeds/image/random')
     .then(resp => resp.jason())
@@ -40,4 +37,3 @@ $(function () {
   console.log('App loaded! Waiting for submit!');
   watchForm();
 });
->>>>>>> f5b061dcd8180db311fa3f125b17e97207117c0d
