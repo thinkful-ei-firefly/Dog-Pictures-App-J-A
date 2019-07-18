@@ -7,3 +7,4 @@ $('#dogForm').submit(function (event) {
   let dogNum = $('#dogNum').val();
   console.log(dogNum);
 });
+
